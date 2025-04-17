@@ -23,7 +23,7 @@ This online bookstore is built using:
 To set up the project locally, open a terminal and run:
 ```sh
 $ git clone https://github.com/aneelabashir786/22f3414_web_frontend
-$ cd 22f3414-aneela-web-as-02
+$ cd 22f3414_web_frontend
 ```
 
 ### 2 Open the Website
