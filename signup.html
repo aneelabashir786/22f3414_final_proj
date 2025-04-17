@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Signup - Biblitopia</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        .error { color: red; font-size: 14px; }
+    </style>
+</head>
+<body class="subpage ls-body">
+    <!-- Header -->
+	<header id="header" class="alt">
+		<div class="logo"><a href="index.html">Biblitopia <span>bookstore</span></a></div>
+		<a href="#menu" class="toggle"><span>Menu</span></a>
+	</header><!-- Nav -->
+	<nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <div class="ls-container">
+        <form class="ls-form" id="signupForm">
+            <h2 class="ls-h2">Sign Up</h2>
+
+            <div class="ls-input-group">
+                <label class="ls-label" for="name">Full Name</label>
+                <input class="ls-input" type="text" id="name" placeholder="Enter your full name" required>
+                <span class="error" id="nameError"></span> 
+            </div>
+
+            <div class="ls-input-group">
+                <label class="ls-label" for="email">Email</label>
+                <input class="ls-input" type="email" id="email" placeholder="Enter your email" required>
+                <span class="error" id="emailError"></span> 
+            </div>
+
+            <div class="ls-input-group">
+                <label class="ls-label" for="password">Password</label>
+                <input class="ls-input" type="password" id="password" placeholder="Create a password" required>
+                <span class="error" id="passwordError"></span> 
+            </div>
+
+            <div class="ls-input-group">
+                <label class="ls-label" for="confirm-password">Confirm Password</label>
+                <input class="ls-input" type="password" id="confirm-password" placeholder="Confirm your password" required>
+                <span class="error" id="confirmPasswordError"></span> 
+            </div>
+
+            <button type="submit" class="ls-btn ">Sign Up</button>
+            <p class="ls-text">Already have an account? <a href="login.html">Login</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("signupForm").addEventListener("submit", function(event) {
+            event.preventDefault(); 
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let confirmPassword = document.getElementById("confirm-password").value.trim();
+
+            let nameError = document.getElementById("nameError");
+            let emailError = document.getElementById("emailError");
+            let passwordError = document.getElementById("passwordError");
+            let confirmPasswordError = document.getElementById("confirmPasswordError");
+
+            
+            let nameRegex = /^[A-Za-z\s]{2,}$/;
+
+           
+            let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            
+           
+            let passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            let isValid = true;
+
+           
+            if (!nameRegex.test(name)) {
+                nameError.innerText = "Full name must be at least 2 characters and contain only letters and spaces.";
+                isValid = false;
+            } else {
+                nameError.innerText = "";
+            }
+
+          
+            if (!emailRegex.test(email)) {
+                emailError.innerText = "Invalid email format!";
+                isValid = false;
+            } else {
+                emailError.innerText = "";
+            }
+
+            
+            if (!passwordRegex.test(password)) {
+                passwordError.innerText = "Password must be at least 8 characters, include an uppercase, a number, and a special character.";
+                isValid = false;
+            } else {
+                passwordError.innerText = "";
+            }
+
+           
+            if (confirmPassword !== password) {
+                confirmPasswordError.innerText = "Passwords do not match!";
+                isValid = false;
+            } else {
+                confirmPasswordError.innerText = "";
+            }
+
+          
+            if (isValid) {
+                alert("Sign Up Successful!");
+                
+            }
+        });
+    </script>
+    <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+</body>
+</html>
