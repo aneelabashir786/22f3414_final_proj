@@ -4467,6 +4467,7 @@ body.is-loading #banner:before {
 }
 
 
+/* login signup */
 
 * {
 	margin: 0;
@@ -4593,4 +4594,128 @@ body.is-loading #banner:before {
 
 .ls-form .ls-text a:hover {
 	text-decoration: underline;
+}
+
+
+
+/* search */
+
+/* Header styling */
+.header-1{
+    background-color: #1c1c1c;
+    padding: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Logo styling */
+.header-1 .logo a {
+    color: white;
+    font-size: 1.8em;
+    text-decoration: none;
+}
+
+/* Search bar container */
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    margin: 5px 10px;
+}
+
+/* Search bar input styling */
+.search-container input {
+    padding: 5px 10px;
+    width: 60%;
+	height:20px;
+    max-width: 400px;
+    font-size: 10px;
+    background-color: #2e2e2e;
+    color: white;
+    border: 1px solid #555;
+    border-radius: 8px;
+}
+
+/* Menu toggle button */
+#header .toggle {
+    color: white;
+}
+
+/* Responsive for small screens */
+@media screen and (max-width: 768px) {
+    #header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .search-container {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .search-container input {
+        width: 80%;
+    }
+}
+
+/* story / feedback  */
+/* Styling for Section 3 - User Testimonials */
+#three {
+    background-color: #1e1e1e; /* Dark background */
+    color: #fff;
+    padding: 60px 0;
+}
+
+#three h2 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 40px;
+}
+
+.testimonials-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.testimonial-card {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-10px); /* Slight hover effect to raise the card */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.testimonial-card .image img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.testimonial-card .content h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.testimonial-card .content p {
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.6;
+}
+
+.testimonial-card .content p:hover {
+    color: #fff; /* Hover effect on text */
 }
