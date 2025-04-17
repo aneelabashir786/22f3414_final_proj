@@ -15,7 +15,7 @@ This project is an online bookstore website that allows users to browse, search,
 This online bookstore is built using:
 - **HTML** – For structuring the website.
 - **CSS** – For styling and enhancing the visual experience.
-- **SASS** - For efficient managment of styling.
+- **JAVA SCRIPT** - For making website interactive.
 
 ##  How to Use
 
@@ -46,8 +46,7 @@ We plan to enhance the project by adding:
 
 ##  Requirements
 - A modern web browser (Google Chrome, Firefox, Edge, etc.)
-- Basic knowledge of HTML ,  SASS& CSS (for customization)
+- Basic knowledge of HTML ,  JAVA SCRIPT & CSS (for customization)
 
 ##  License
 This project is licensed under the MIT License.
-# 22f3414_web_frontend
