@@ -22,7 +22,7 @@ This online bookstore is built using:
 ### 1 Clone This Repository
 To set up the project locally, open a terminal and run:
 ```sh
-$ git clone https://github.com/aneelabashir786/22f3414-aneela-web-as-02
+$ git clone https://github.com/aneelabashir786/22f3414_web_frontend
 $ cd 22f3414-aneela-web-as-02
 ```
 
@@ -35,7 +35,7 @@ Simply open the `index.html` file in any modern web browser to view the bookstor
 - Add books to the cart and proceed to checkout.
 
 ## live Demo
-   
+   [Click here to view the live site]( https://aneelabashir786.github.io/22f3414_web_frontend/)
 
 ##  Future Enhancements
 We plan to enhance the project by adding:
