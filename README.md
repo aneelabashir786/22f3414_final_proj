@@ -4,6 +4,9 @@
 ##  Overview
 This project is an online bookstore website that allows users to browse, search, and purchase books online. Built using HTML and CSS, the website provides a user-friendly interface and seamless shopping experience.
 
+The template that i have taken  is :
+https://templated.co/transitive/
+
 ###  Features
 -  **Browse Books** – Explore a wide collection of books across various genres.
 -  **Search Functionality** – Quickly find books by title, author, or category.
