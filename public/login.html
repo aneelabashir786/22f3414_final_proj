@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>login - Biblitopia</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+        }
+
+        .toggle-password:hover {
+            color: #333;
+        }
+
+        .ls-input-group div {
+            position: relative;
+        }
+    </style>
+
+</head>
+
+<body class="ls-body">
+    <!-- Header -->
+    <header id="header" class="alt">
+        <div class="logo"><a href="index.html">Biblitopia <span>bookstore</span></a></div>
+        <a href="#menu" class="toggle"><span>Menu</span></a>
+    </header>
+    <!-- Nav -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <div class="ls-container ls-container--login">
+        <form class="ls-form" id="loginForm">
+            <h2 class="ls-h2 ls-h2--login">Login</h2>
+
+            <div class="ls-input-group">
+                <label class="ls-label" for="email">Email</label>
+                <input class="ls-input" type="email" id="email" placeholder="Enter your email" required>
+                <span class="error" id="emailError"></span>
+            </div>
+
+            <div class="ls-input-group">
+
+                <label class="ls-label" for="password">Password</label>
+                <div style="position:relative">
+                    <input class="ls-input" type="password" id="password" placeholder="Enter your password" required>
+                    <span class="toggle-password" onclick="togglePassword('password')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <span class="error" id="passwordError"></span>
+            </div>
+
+            <div class="ls-forgot-password">
+                <a href="forgotpswd.html">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="ls-btn ls-linktext">Login</button>
+            <p class="ls-text">Don't have an account? <a href="signup.html">Sign Up</a></p>
+        </form>
+    </div>
+
+    <!-- <script>
+        document.getElementById("loginForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+
+            // Clear previous errors
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            // Email regex: standard email format (your original)
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            // Password regex: At least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special char (your original)
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            function togglePassword(fieldId) {
+                const field = document.getElementById(fieldId);
+                const icon = field.nextElementSibling.querySelector('i');
+                if (field.type === "password") {
+                    field.type = "text";
+                    icon.classList.replace('fa-eye', 'fa-eye-slash');
+                } else {
+                    field.type = "password";
+                    icon.classList.replace('fa-eye-slash', 'fa-eye');
+                }
+            }
+            let isValid = true;
+
+            // Validate email (your original validation)
+            if (!emailRegex.test(email)) {
+                emailError.textContent = "Invalid email format!";
+                isValid = false;
+            }
+
+            // Validate password (your original strict requirements)
+            if (!passwordRegex.test(password)) {
+                passwordError.textContent = "Password must be at least 8 characters, include an uppercase, a number, and a special character.";
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            try {
+                // Show loading state
+                const submitBtn = event.target.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Logging in...";
+
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Login";
+
+                if (response.ok && data.success) {
+                    // Store user data in localStorage
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    // Redirect to home page
+                    window.location.href = "index.html";
+                } else {
+                    // Show error message (use the same message for both email/password errors for security)
+                    passwordError.textContent = data.message || "Invalid email or password";
+                }
+            } catch (err) {
+                console.error("Login error:", err);
+                passwordError.textContent = "Network error. Please try again.";
+                // Reset button state if error occurs
+                const submitBtn = event.target.querySelector('button[type="submit"]');
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Login";
+            }
+        });
+    </script> -->
+    <script>
+        // MOVE THIS FUNCTION OUTSIDE THE SUBMIT HANDLER
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = field.parentElement.querySelector('.toggle-password i');
+
+            if (field.type === "password") {
+                field.type = "text";
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                field.type = "password";
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        document.getElementById("loginForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const emailError = document.getElementById("emailError");
+            const passwordError = document.getElementById("passwordError");
+
+            // Clear previous errors
+            emailError.textContent = "";
+            passwordError.textContent = "";
+
+            // Email regex: standard email format (your original)
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            // Password regex: At least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special char (your original)
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+            let isValid = true;
+
+            // Validate email (your original validation)
+            if (!emailRegex.test(email)) {
+                emailError.textContent = "Invalid email format!";
+                isValid = false;
+            }
+
+            // Validate password (your original strict requirements)
+            if (!passwordRegex.test(password)) {
+                passwordError.textContent = "Password must be at least 8 characters, include an uppercase, a number, and a special character.";
+                isValid = false;
+            }
+
+            if (!isValid) return;
+
+            try {
+                // Show loading state
+                const submitBtn = event.target.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.textContent = "Logging in...";
+
+                const response = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+
+                const data = await response.json();
+
+                // Reset button state
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Login";
+
+                if (response.ok && data.success) {
+                    // Store user data in localStorage
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    // Redirect to home page
+                    window.location.href = "index.html";
+                } else {
+                    // Show error message (use the same message for both email/password errors for security)
+                    passwordError.textContent = data.message || "Invalid email or password";
+                }
+            } catch (err) {
+                console.error("Login error:", err);
+                passwordError.textContent = "Network error. Please try again.";
+                // Reset button state if error occurs
+                const submitBtn = event.target.querySelector('button[type="submit"]');
+                submitBtn.disabled = false;
+                submitBtn.textContent = "Login";
+            }
+        });
+    </script>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forgot Password</title>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to right, rgba(45, 58, 74, 0.7), rgba(151, 165, 180, 0.7)), url(images/lib1.jpg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .forgot-password-container {
+      background-color: rgb(248, 244, 244);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 400px;
+      height: 310px;
+    }
+
+    h2 {
+      color: #101d2c;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    label {
+      color: #6D5D4B;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .error {
+      color: red;
+      font-size: 14px;
+      display: block;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #101d2c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0b1622;
+    }
+
+    .back-link {
+      margin-top: 15px;
+      display: block;
+      text-align: center;
+      color: #101d2c;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+
+    .btn-text1 {
+      color: white !important ;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header id="header" class="alt">
+    <div class="logo"><a href="index.html">Biblitopia <span>bookstore</span></a></div>
+    <a href="#menu" class="toggle"><span>Menu</span></a>
+  </header><!-- Nav -->
+  <nav id="menu">
+    <ul class="links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="login.html">Log In</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+    </ul>
+  </nav>
+
+  <div class="forgot-password-container">
+    <h2>Forgot Password</h2>
+    <form id="forgotPasswordForm">
+      <label for="email">Enter your email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your Email" required />
+      <span class="error" id="emailError"></span>
+      <button type="submit" class="btn-text1">Send Reset Link</button>
+    </form>
+    <a class="back-link" href="login.html">Back to Login</a>
+  </div>
+  <script>
+    document.getElementById("forgotPasswordForm").addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const emailError = document.getElementById("emailError");
+      const submitBtn = event.target.querySelector("button[type='submit']");
+
+      // Validate email
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(email)) {
+        emailError.innerText = "Invalid email format!";
+        return;
+      }
+
+      emailError.innerText = "";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "Sending...";
+
+      try {
+        const response = await fetch("/send-email", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            to: email,
+            subject: "Reset Your Password",
+            text: `Your new password is "Test@1234"`
+          }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to send email");
+        }
+
+        alert("Password reset link sent to " + email);
+      } catch (err) {
+        console.error("Error:", err);
+        alert(err.message || "Failed to send email. Please try again later.");
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send Reset Link";
+      }
+    });
+
+
+
+
+
+  </script>
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.scrolly.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
+  <script src="assets/js/skel.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
+</body>
+
+</html>

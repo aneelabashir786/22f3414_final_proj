@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Signup - Biblitopia</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+        }
+
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #666;
+        }
+
+        .toggle-password:hover {
+            color: #333;
+        }
+
+        .ls-input-group div {
+            position: relative;
+        }
+    </style>
+</head>
+
+<body class="subpage ls-body">
+    <!-- Header -->
+    <header id="header" class="alt">
+        <div class="logo"><a href="index.html">Biblitopia <span>bookstore</span></a></div>
+        <a href="#menu" class="toggle"><span>Menu</span></a>
+    </header><!-- Nav -->
+    <nav id="menu">
+        <ul class="links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Log In</a></li>
+            <li><a href="signup.html">Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <div class="ls-container">
+        <!-- Replace the form section inside your HTML file with this updated version -->
+        <form class="ls-form" id="signupForm">
+            <h2 class="ls-h2">Sign Up</h2>
+
+            <div class="ls-input-group">
+                <label class="ls-label" for="first-name">First Name</label>
+                <input class="ls-input" type="text" id="first-name" placeholder="Enter your first name" required>
+                <span class="error" id="firstNameError"></span>
+            </div>
+
+            <div class="ls-input-group">
+                <label class="ls-label" for="last-name">Last Name</label>
+                <input class="ls-input" type="text" id="last-name" placeholder="Enter your last name" required>
+                <span class="error" id="lastNameError"></span>
+            </div>
+
+            <div class="ls-input-group">
+                <label class="ls-label" for="email">Email</label>
+                <input class="ls-input" type="email" id="email" placeholder="Enter your email" required>
+                <span class="error" id="emailError"></span>
+            </div>
+
+            <!-- <div class="ls-input-group">
+                <label class="ls-label" for="password">Password</label>
+                <input class="ls-input" type="password" id="password" placeholder="Create a password" required>
+                <span class="error" id="passwordError"></span>
+            </div>
+
+            <div class="ls-input-group">
+                <label class="ls-label" for="confirm-password">Confirm Password</label>
+                <input class="ls-input" type="password" id="confirm-password" placeholder="Confirm your password"
+                    required>
+                <span class="error" id="confirmPasswordError"></span>
+            </div> -->
+            <div class="ls-input-group">
+                <label class="ls-label" for="password">Password</label>
+                <div style="position:relative">
+                    <input class="ls-input" type="password" id="password" placeholder="Create a password" required>
+                    <span class="toggle-password" onclick="togglePassword('password')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <span class="error" id="passwordError"></span>
+            </div>
+
+            <div class="ls-input-group">
+                <label class="ls-label" for="confirm-password">Confirm Password</label>
+                <div style="position:relative">
+                    <input class="ls-input" type="password" id="confirm-password" placeholder="Confirm your password"
+                        required>
+                    <span class="toggle-password" onclick="togglePassword('confirm-password')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <span class="error" id="confirmPasswordError"></span>
+            </div>
+            <button type="submit" class="ls-btn ls-linktext">Sign Up</button>
+            <p class="ls-text">Already have an account? <a href="login.html">Login</a></p>
+        </form>
+
+    </div>
+
+    <script>
+        // MOVE THIS FUNCTION OUTSIDE THE SUBMIT HANDLER (TOP OF SCRIPT TAG)
+        function togglePassword(fieldId) {
+            const field = document.getElementById(fieldId);
+            const icon = field.parentElement.querySelector('.toggle-password i');
+            
+            if (field.type === "password") {
+                field.type = "text";
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                field.type = "password";
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+    
+        document.getElementById("signupForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+    
+            let firstName = document.getElementById("first-name").value.trim();
+            let lastName = document.getElementById("last-name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let password = document.getElementById("password").value.trim();
+            let confirmPassword = document.getElementById("confirm-password").value.trim();
+    
+            let isValid = true;
+    
+            // Clear previous error messages
+            document.getElementById("firstNameError").textContent = "";
+            document.getElementById("lastNameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+            document.getElementById("confirmPasswordError").textContent = "";
+    
+            // Validate First Name
+            if (firstName === "") {
+                document.getElementById("firstNameError").textContent = "First name is required.";
+                isValid = false;
+            }
+    
+            // Validate Last Name
+            if (lastName === "") {
+                document.getElementById("lastNameError").textContent = "Last name is required.";
+                isValid = false;
+            }
+    
+            // Better Email Validation using Regex
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent = "Please enter a valid email address.";
+                isValid = false;
+            }
+    
+            // Password Validation
+            // Strong Password Regex
+            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    
+            if (!passwordPattern.test(password)) {
+                document.getElementById("passwordError").textContent =
+                    "Password must be at least 8 characters, include uppercase, lowercase, number, and special character.";
+                isValid = false;
+            }
+    
+            if (password !== confirmPassword) {
+                document.getElementById("confirmPasswordError").textContent = "Passwords do not match.";
+                isValid = false;
+            }
+    
+            if (isValid) {
+                try {
+                    const response = await fetch('http://localhost:3000/api/auth/signup', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email,
+                            password: password
+                        }),
+                    });
+    
+                    const data = await response.json();
+    
+                    if (response.ok) {
+                        alert("Sign Up Successful!");
+                        window.location.href = "login.html";
+                    } else {
+                        throw new Error(data.message || 'Signup failed');
+                    }
+                } catch (err) {
+                    alert("Error: " + err.message);
+                }
+            }
+        });
+    </script>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.scrolly.min.js"></script>
+    <script src="assets/js/jquery.scrollex.min.js"></script>
+    <script src="assets/js/skel.min.js"></script>
+    <script src="assets/js/util.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html> 

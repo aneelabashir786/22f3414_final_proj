@@ -1,0 +1,378 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>All Books - Biblitopia</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <style>
+        /* Layout Fixes */
+        body {
+            margin: 0;
+            padding-top: 100px; /* Space for fixed header */
+        }
+
+        /* Header Styling */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #ffffff;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            height : 90px;
+        }
+
+        .logo {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .search-container {
+            flex: 2;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        #cart-icon {
+            flex: 0.5;
+            text-align: right;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        /* Search Bar Improvements */
+        #searchInput {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 30px;
+            background: #f8f8f8;
+            transition: all 0.3s ease;
+            color: black;
+           
+        }
+
+        #searchInput:focus {
+            border-color: #3498db;
+            background: #ffffff;
+            box-shadow: 0 0 8px rgba(52,152,219,0.2);
+        }
+
+        /* Book Grid Adjustments */
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 30px 5%;
+            margin-top: 20px;
+        }
+
+        .book-card {
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+        }
+
+        /* Book Content Styling */
+        .book-cover {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        .book-info {
+            padding: 20px;
+            background: linear-gradient(to bottom, #ffffff 80%, #f9f9f9);
+        }
+
+        .book-title {
+            font-size: 1.2em;
+            margin: 0 0 12px 0;
+            color: #2c3e50;
+            line-height: 1.3;
+            min-height: 3.2em;
+        }
+
+        .book-author {
+            color: #7f8c8d;
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            font-weight: 500;
+        }
+
+        .book-meta {
+            font-size: 0.85em;
+            color: #95a5a6;
+            margin-bottom: 15px;
+        }
+
+        /* Button Styling */
+        .button {
+            width: 100%;
+            padding: 12px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .button:hover {
+            background: #2980b9;
+            transform: scale(1.02);
+        }
+
+        /* Loading and Error States */
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 50px auto;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            padding: 40px 20px;
+            font-size: 1.1em;
+            background: #fff5f5;
+            border-radius: 10px;
+            margin: 20px 5%;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 140px;
+            }
+
+            #header {
+                flex-wrap: wrap;
+                padding: 15px;
+            }
+
+            .logo {
+                order: 1;
+                flex: 100%;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .search-container {
+                order: 3;
+                flex: 100%;
+                margin: 15px 0;
+            }
+
+            #cart-icon {
+                order: 2;
+                flex: none;
+                margin-left: auto;
+            }
+
+            .books-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            .book-cover {
+                height: 320px;
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="alt header-1">
+        <div class="logo">
+            <a href="index.html">Biblitopia <span>bookstore</span></a>
+        </div>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search books...">
+        </div>
+        <div id="cart-icon" onclick="viewCart()">
+            🛒 Cart (<span id="cart-count">0</span>)
+        </div>
+        <a href="#menu" class="toggle"><span>Menu</span></a>
+    </header>
+
+    <!-- Main Content -->
+    <section id="all-books">
+        <div class="loader" id="loading"></div>
+        <div id="books-container" class="books-grid"></div>
+        <div id="error-message" class="error-message"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copyright">
+            &copy; Biblitopia. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Cart functionality
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        updateCartCount();
+
+        // Book loading variables
+        let currentPage = 1;
+        const booksPerPage = 20;
+        let isLoading = false;
+
+        // Initial load
+        loadBooks('subject:fiction');
+
+        // Search input handler with debounce
+        let searchTimeout;
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                currentPage = 1;
+                loadBooks(e.target.value);
+            }, 500);
+        });
+
+        async function loadBooks(query = '') {
+            if (isLoading) return;
+            
+            try {
+                showLoading();
+                isLoading = true;
+                
+                const response = await fetch(
+                    `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&page=${currentPage}&limit=${booksPerPage}`
+                );
+                
+                if (!response.ok) throw new Error('Failed to fetch books');
+                
+                const data = await response.json();
+                
+                if (!data.docs || data.docs.length === 0) {
+                    showMessage('No books found. Try another search!');
+                    return;
+                }
+                
+                displayBooks(data.docs);
+                currentPage++;
+                
+            } catch (error) {
+                showMessage(error.message);
+            } finally {
+                hideLoading();
+                isLoading = false;
+            }
+        }
+
+        function displayBooks(books) {
+            const container = document.getElementById('books-container');
+            
+            books.forEach(book => {
+                const bookEl = document.createElement('div');
+                bookEl.className = 'book-card';
+                bookEl.innerHTML = `
+                    <img class="book-cover" src="${getCoverImage(book)}" alt="${book.title}">
+                    <div class="book-info">
+                        <h3 class="book-title">${book.title}</h3>
+                        <p class="book-author">${book.author_name?.[0] || 'Unknown Author'}</p>
+                        <div class="book-meta">
+                            <p>Published: ${book.first_publish_year || 'N/A'}</p>
+                            <p>${(book.subject || []).slice(0, 2).join(', ')}</p>
+                        </div>
+                        <button class="button" onclick="addToCart({
+                            title: '${book.title.replace(/'/g, "\\'")}',
+                            author: '${(book.author_name?.[0] || 'Unknown').replace(/'/g, "\\'")}',
+                            price: ${(Math.random() * 20 + 10).toFixed(2)},
+                            image: '${getCoverImage(book)}'
+                        })">
+                            Add to Cart $${(Math.random() * 20 + 10).toFixed(2)}
+                        </button>
+                    </div>
+                `;
+                container.appendChild(bookEl);
+            });
+        }
+
+        function getCoverImage(book) {
+            return book.cover_i 
+                ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+                : 'images/default-book.jpg';
+        }
+
+        function addToCart(book) {
+            cart.push(book);
+            updateCartCount();
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`Added "${book.title}" to cart!`);
+        }
+
+        function viewCart() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            const cartItems = cart.map(item => 
+                `- ${item.title} ($${item.price})`
+            ).join('\n');
+            alert(`Cart Items:\n${cartItems}\n\nTotal: $${calculateTotal()}`);
+        }
+
+        function calculateTotal() {
+            return cart.reduce((sum, item) => sum + Number(item.price), 0).toFixed(2);
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = cart.length;
+        }
+
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('error-message').textContent = '';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function showMessage(message) {
+            document.getElementById('error-message').textContent = message;
+            document.getElementById('books-container').innerHTML = '';
+        }
+
+        // Infinite scroll
+        window.addEventListener('scroll', () => {
+            const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+            
+            if (scrollTop + clientHeight >= scrollHeight - 5 && !isLoading) {
+                loadBooks(document.getElementById('searchInput').value);
+            }
+        });
+    </script>
+</body>
+</html>

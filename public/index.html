@@ -1,0 +1,370 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Biblitopia - BOOKSTORE</title>
+	<meta charset="utf-8">
+	<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<!-- <style>
+		/* Header Layout Fix */
+		.header-1 {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 15px 20px;
+		}
+
+		.header-right {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+			margin-left: auto;
+			/* Pushes to right */
+		}
+
+		#cart-icon {
+			order: 1;
+			cursor: pointer;
+			white-space: nowrap;
+		}
+
+		.toggle {
+			order: 2;
+		}
+
+		/* Mobile Responsiveness */
+		@media (max-width: 768px) {
+			.header-right {
+				gap: 15px;
+			}
+
+			#cart-icon {
+				font-size: 14px;
+			}
+
+			.logo span {
+				display: none;
+				/* Hide "bookstore" text on mobile */
+			}
+		}
+	</style> -->
+</head>
+
+<body>
+	<!-- Header -->
+	<header id="header" class="alt header-1">
+		<div class="logo">
+			<a href="index.html">Biblitopia <span>bookstore</span></a>
+		</div>
+
+
+
+		<div id="cart-icon" onclick="viewCart()">
+			<!-- 🛒 Cart (<span id="cart-count">0</span>) -->
+		</div> 
+
+		<a href="#menu" class="toggle"><span>Menu</span></a>
+	</header>
+
+	<!-- <header id="header" class="alt header-1">
+		<div class="logo">
+			<a href="index.html">Biblitopia <span>bookstore</span></a>
+		</div>
+
+		<div class="header-right">
+			<div id="cart-icon" onclick="viewCart()">
+				🛒 Cart (<span id="cart-count">0</span>)
+			</div>
+			<a href="#menu" class="toggle"><span>Menu</span></a>
+		</div>
+	</header> -->
+
+
+	<!-- Nav -->
+	<nav id="menu">
+		<ul class="links">
+			<li><a href="index.html">Home</a></li>
+			<li id="login-link"><a href="login.html">Log In</a></li>
+			<li id="signup-link"><a href="signup.html">Sign Up</a></li>
+		</ul>
+	</nav>
+
+	<section id="banner" data-video="images/banner">
+		<div class="inner">
+			<h1>Biblitopia</h1>
+			<h2 class="main-heading">Books are a uniquely portable magic</h2>
+			<p>
+				welcome to Biblitopia! Whether you're a passionate reader, a curious learner, or looking for the
+				perfect gift,
+				we’ve got something for everyone. Start your next literary adventure today!
+			</p>
+			<a href="books.html" class="button special scrolly">see more books</a>
+
+		</div>
+	</section>
+	<!-- One -->
+	<section id="one" class="wrapper style2">
+		<div class="inner">
+			<div>
+				<div class="box">
+					<div class="imgfit2">
+						<img src="images/lib1.jpg" alt="" width="2500" height="1035">
+					</div>
+					<div class="content">
+						<header class="align-center">
+							<h2>Explore Our Wide Range of Books</h2>
+							<p>Find your next favorite read from our extensive collection</p>
+						</header>
+						<hr>
+						<p>At Biblitopia, we offer a diverse selection of books to suit every interest, from timeless
+							classics to contemporary bestsellers. Whether you’re an avid reader or someone who enjoys an
+							occasional page-turner, our bookstore has something special just for you. Dive into a world
+							of stories, knowledge, and imagination today!</p>
+						<p>From thrilling mysteries and fantasy epics to historical fiction and educational books, you
+							can explore genres ranging from action-packed adventures to insightful non-fiction. With our
+							user-friendly interface and curated collections, shopping for your next book is just a click
+							away. We bring books to your doorstep, making reading easier than ever!</p>
+						<button class="button button--primary">Learn More</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<!-- Two -->
+	<section id="two" class="wrapper style3">
+		<div class="inner">
+			<div id="flexgrid">
+				<!-- Book 1 -->
+				<div class="book-card">
+					<img src="images/book1.jpeg" alt="Book Image">
+					<div class="book-info">
+						<header>
+							<h3>Author: Khaled Hossaini</h3>
+						</header>
+						<p>Genre: Historical fiction</p>
+						<ul class="actions">
+							<a href="book.html?title=The%20Kite%20Runner&author=Khaled%20Hosseini&desc=A%20story%20of%20friendship%20and%20redemption%20in%20Afghanistan&rating=4.8&price=$12.99&years=21"
+								class="button alt">Learn More</a>
+							<li><button class="button" onclick="addToCart('The Kite Runner')">Add to Cart</button></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Book 2 -->
+				<div class="book-card">
+					<img src="images/book2.jpeg" alt="Book Image">
+					<div class="book-info">
+						<header>
+							<h3>Author: Khaled Hossaini</h3>
+						</header>
+						<p>Genre: Historical fiction</p>
+						<ul class="actions">
+							<a href="book.html?title=A%20Thousand%20Splendid%20Suns&author=Khaled%20Hosseini&desc=A%20heartbreaking%20tale%20of%20two%20Afghan%20women&rating=4.7&price=$13.99&years=17"
+								class="button alt">Learn More</a>
+							<li><button class="button" onclick="addToCart('A Thousand Splendid Suns')">Add to
+									Cart</button></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Book 3 -->
+				<div class="book-card">
+					<img src="images/book3.jpeg" alt="Book Image">
+					<div class="book-info">
+						<header>
+							<h3>Author: Paulo Coelho</h3>
+						</header>
+						<p>Genre: Fantasy Fiction</p>
+						<ul class="actions">
+							<a href="book.html?title=The%20Alchemist&author=Paulo%20Coelho&desc=An%20inspirational%20journey%20of%20a%20shepherd%20boy%20seeking%20his%20destiny&rating=4.5&price=$9.99&years=35"
+								class="button alt">Learn More</a>
+							<li><button class="button" onclick="addToCart('The Alchemist')">Add to Cart</button></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Book 4 -->
+				<div class="book-card">
+					<img src="images/book4.jpeg" alt="Book Image">
+					<div class="book-info">
+						<header>
+							<h3>Author: Tariq Ramadan</h3>
+						</header>
+						<p>Genre: Islamic History</p>
+						<ul class="actions">
+							<a href="book.html?title=In%20the%20Footsteps%20of%20the%20Prophet&author=Tariq%20Ramadan&desc=A%20spiritual%20biography%20of%20Prophet%20Muhammad%20(PBUH)&rating=4.6&price=$11.50&years=18"
+								class="button alt">Learn More</a>
+							<li><button class="button" onclick="addToCart('In the Footsteps of the Prophet')">Add to
+									Cart</button></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Book 5 -->
+				<div class="book-card">
+					<img src="images/book5.jpeg" alt="Book Image">
+					<div class="book-info">
+						<header>
+							<h3>Author: Tehmima Anam</h3>
+						</header>
+						<p>Genre: Historical fiction</p>
+						<ul class="actions">
+							<a href="book.html?title=The%20Good%20Muslim&author=Tehmima%20Anam&desc=A%20novel%20set%20in%20post-war%20Bangladesh&rating=4.2&price=$10.50&years=14"
+								class="button alt">Learn More</a>
+							<li><button class="button" onclick="addToCart('The Good Muslim')">Add to Cart</button></li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Book 6 -->
+				<div class="book-card">
+					<img src="images/book6.jpeg" alt="Book Image">
+					<div class="book-info">
+						<header>
+							<h3>Author: J.K. Rowling</h3>
+						</header>
+						<p>Genre: Fiction</p>
+						<ul class="actions">
+							<a href="book.html?title=Harry%20Potter&author=J.K.%20Rowling&desc=A%20young%20wizard's%20journey&rating=4.9&price=$14.50&years=26"
+								class="button alt">Learn More</a>
+							<li><button class="button" onclick="addToCart('Harry Potter')">Add to Cart</button></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Three -->
+	<!-- Section Three - User Testimonials -->
+	<section id="three" class="wrapper style2">
+		<div class="inner">
+			<h2 class="align-center">What Our Readers Say</h2>
+			<div class="testimonials-grid">
+				<div class="testimonial-card">
+					<div class="image fit">
+						<img src="images/people1.jpeg" alt="" />
+					</div>
+					<div class="content">
+						<h3>Mary Smith</h3>
+						<p>"Biblitopia is my go-to for all things books! The variety, the quality, and the experience
+							are unmatched!"</p>
+					</div>
+				</div>
+
+				<div class="testimonial-card">
+					<div class="image fit">
+						<img src="images/people2.jpeg" alt="" />
+					</div>
+					<div class="content">
+						<h3>Jack Wilson</h3>
+						<p>"A wonderful collection of books. I found the exact title I was looking for and more. Highly
+							recommend!"</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Four -->
+	<section id="four" class="wrapper style3">
+		<div class="inner">
+
+			<header class="align-center">
+				<p>"When I look back, I am so impressed again with the life-giving power of literature. If I were a
+					young person today, trying to gain a sense of myself in the world, I would do that again by reading,
+					just as I did when I was young."</p>
+				by <h2>"Maya Angelou"</h2>
+			</header>
+		</div>
+	</section>
+	<!-- Footer -->
+	<footer>
+		<div class="copyright">
+			&copy; copyright by aneela bashir</a>.
+		</div>
+	</footer>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+	<!-- search books -->
+	<script>
+		// Replace the existing filterBooks() function in index.html
+		async function searchBooks() {
+			const query = document.getElementById('bookSearch').value;
+			if (!query) return;
+
+			try {
+				const response = await fetch(`http://localhost:3000/api/search?q=${encodeURIComponent(query)}`);
+				const data = await response.json();
+				displayBooks(data.data); // Render results
+			} catch (err) {
+				console.error("Search failed:", err);
+			}
+		}
+
+		function displayBooks(books) {
+			const flexgrid = document.getElementById('flexgrid');
+			flexgrid.innerHTML = books.map(book => `
+             <div class="book-card">
+             <img src="${book.cover || 'images/default-book-cover.jpg'}" alt="${book.title}">
+             <div class="book-info">
+             <header>
+                <h3>${book.title}</h3>
+               <p>By ${book.author}</p>
+             </header>
+             <ul class="actions">
+             <button class="button" onclick="addToCart('${book.title}')">Add to Cart</button>
+             </ul>
+            </div>
+            </div>
+        `).join('');
+		}
+
+	</script>
+	<!-- add to cart -->
+	<script>
+		// Replace existing cart functions
+		let cart = [];
+
+		async function addToCart(bookTitle) {
+			try {
+				const response = await fetch('/api/cart', {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ title: bookTitle })
+				});
+
+				if (response.ok) {
+					cart = await response.json();
+					document.getElementById("cart-count").textContent = cart.length;
+					alert(`Added "${bookTitle}" to cart!`);
+				}
+			} catch (err) {
+				console.error("Cart error:", err);
+			}
+		}
+
+		async function viewCart() {
+			const response = await fetch('/api/cart');
+			const cartItems = await response.json();
+
+			if (cartItems.length === 0) {
+				alert("Your cart is empty.");
+			} else {
+				alert("Cart Items:\n" + cartItems.map(item => item.title).join("\n"));
+			}
+		}
+	</script>
+</body>
+
+</html>
