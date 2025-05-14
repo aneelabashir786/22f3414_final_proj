@@ -37,8 +37,7 @@ Simply open the `index.html` file in any modern web browser to view the bookstor
 - Search for specific books using the search bar.
 - Add books to the cart and proceed to checkout.
 
-## live Demo
-   [Click here to view the live site]( https://aneelabashir786.github.io/22f3414_web_frontend/)
+
 
 ##  Future Enhancements
 We plan to enhance the project by adding:
